@@ -1,4 +1,3 @@
-```html
 <p align="center">
   <img src="images/Cabecalho.png" alt="Cabeçalho" width="100%">
 </p>
@@ -13,7 +12,6 @@
   Ilum — School of Science | Campinas, 2026
 </p>
 
----
 
 ## Sobre o projeto
 
