@@ -3,13 +3,13 @@
 </p>
 
 <h1 align="center">
-   Tiamat — <i>Classificação de Resposta Biológica Molecular</i>
+   Tiamat: <i>Classificação de Resposta Biológica Molecular</i>
 </h1>
 
 <p align="center">
   <i>Aprendizado de máquina para predição de respostas biológicas a partir de descritores moleculares, com otimização de hiperparâmetros por Optuna</i>
   <br><br>
-  Ilum — School of Science | Campinas, 2026
+  Ilum School of Science | Campinas, 2026
 </p>
 
 
