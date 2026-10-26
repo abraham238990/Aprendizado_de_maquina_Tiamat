@@ -7,5 +7,5 @@
 #SBATCH --mem=8G
 #SBATCH --time=06:00:00
 
-# Execução do script Python no ambiente virtual configurado
+# Execução do script Python no ambiente virtual
 /home/abraham2610048/env_analise/bin/python /home/abraham2610048/aprendizado_maquina/job.py
