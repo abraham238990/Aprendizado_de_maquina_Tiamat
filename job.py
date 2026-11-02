@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 import os
 import matplotlib
@@ -77,7 +76,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 
-# Configura o Matplotlib para rodar em modo headless (sem interface gráfica)
+# Configura o Matplotlib para rodar em modo headless (sem interface grÃ¡fica)
 plt.switch_backend('Agg')
 
 # Desativa logs verbozos do Optuna
@@ -98,7 +97,7 @@ y = df['target'].astype(int)
 
 SEMENTE_ALEATORIA = 67
 
-#  Divisão inicial (80% treino, 20% teste)
+#  DivisÃ£o inicial (80% treino, 20% teste)
 >>>>>>> 08970b513e49b5c478f87028f8ad75cb1ed485eb
 X_treino, X_teste, y_treino, y_teste = train_test_split(
     X, y, test_size=0.2, random_state=SEMENTE_ALEATORIA, stratify=y
@@ -155,7 +154,7 @@ plt.title("Mapa de Calor da Matriz de Correlacao (Pearson - Amostra D1-D15)")
 plt.savefig('matriz_correlacao.png', dpi=300, bbox_inches='tight')
 plt.close()
 
-# PCA + Random Forest (Com persist�ncia)
+# PCA + Random Forest (Com persistência)
 def objetivo_pca(trial):
     n_components = trial.suggest_int("n_components", 1, min(100, X_treino.shape[1]))
     n_estimators = trial.suggest_int("n_estimators", 50, 200)
@@ -203,12 +202,12 @@ curvas_roc['Baseline'] = (fpr_base, tpr_base)
 # Arvore de Decisao
 def objetivo_ad(trial):
 =======
-# Escalonamento específico para algoritmos sensíveis à distância (KNN)
+# Escalonamento especÃ­fico para algoritmos sensÃ­veis Ã  distÃ¢ncia (KNN)
 scaler = StandardScaler()
 X_treino_scaled = scaler.fit_transform(X_treino)
 X_teste_scaled = scaler.transform(X_teste)
 
-# Validação cruzada padrão para os modelos
+# ValidaÃ§Ã£o cruzada padrÃ£o para os modelos
 cv_stratified = StratifiedKFold(n_splits=5, shuffle=True, random_state=SEMENTE_ALEATORIA)
 
 #  Baseline
@@ -221,13 +220,13 @@ y_prob_base = baseline.predict_proba(X_teste)[:, 1]
 acc_base = accuracy_score(y_teste, y_pred_base)
 auc_base = roc_auc_score(y_teste, y_prob_base)
 
-print(f"Acurácia do Baseline: {acc_base:.4f}")
+print(f"AcurÃ¡cia do Baseline: {acc_base:.4f}")
 print(f"ROC-AUC do Baseline:  {auc_base:.4f}")
 
 estudos = {}
 melhores_modelos = {}
 
-#  Árvore de Decisão 
+#  Ãrvore de DecisÃ£o 
 def objectivo_ad(trial):
 >>>>>>> 08970b513e49b5c478f87028f8ad75cb1ed485eb
     params = {
@@ -260,9 +259,9 @@ def objetivo_fa(trial):
 
 study_ad = optuna.create_study(direction="maximize")
 study_ad.optimize(objectivo_ad, n_trials=100)
-estudos['Árvore de Decisão'] = study_ad
-melhores_modelos['Árvore de Decisão'] = DecisionTreeClassifier(**study_ad.best_params, random_state=SEMENTE_ALEATORIA)
-print(f"[Árvore de Decisão] Melhor ROC-AUC (CV): {study_ad.best_value:.4f}")
+estudos['Ãrvore de DecisÃ£o'] = study_ad
+melhores_modelos['Ãrvore de DecisÃ£o'] = DecisionTreeClassifier(**study_ad.best_params, random_state=SEMENTE_ALEATORIA)
+print(f"[Ãrvore de DecisÃ£o] Melhor ROC-AUC (CV): {study_ad.best_value:.4f}")
 
 #  Random Forest 
 def objectivo_fa(trial):
@@ -415,7 +414,7 @@ except Exception:
 estudos['LightGBM'] = study_lgb
 melhores_modelos['LightGBM'] = LGBMClassifier(**study_lgb.best_params, random_state=SEMENTE_ALEATORIA, n_jobs=-1, verbose=-1)
 
-# Avalia��o Final no Conjunto de Teste
+# Avaliação Final no Conjunto de Teste
 resultados_desempenho = []
 
 resultados_desempenho.append({
@@ -438,19 +437,19 @@ estudos['LightGBM'] = study_lgb
 melhores_modelos['LightGBM'] = LGBMClassifier(**study_lgb.best_params, random_state=SEMENTE_ALEATORIA, n_jobs=-1, verbose=-1)
 print(f"[LightGBM] Melhor ROC-AUC (CV): {study_lgb.best_value:.4f}")
 
-#  Avaliação Final no Conjunto de Teste
+#  AvaliaÃ§Ã£o Final no Conjunto de Teste
 resultados_desempenho = []
 curvas_roc = {}
 
-# Avaliação do Baseline
+# AvaliaÃ§Ã£o do Baseline
 resultados_desempenho.append({
     'Modelo': 'Baseline',
-    'Acurácia': acc_base,
+    'AcurÃ¡cia': acc_base,
     'ROC-AUC': auc_base
 })
 curvas_roc['Baseline'] = (roc_curve(y_teste, y_prob_base), auc_base)
 
-# Avaliação dos demais modelos
+# AvaliaÃ§Ã£o dos demais modelos
 for nome, modelo in melhores_modelos.items():
     X_tr = X_treino_scaled if nome == 'KNN' else X_treino
     X_te = X_teste_scaled if nome == 'KNN' else X_teste
@@ -473,7 +472,7 @@ for nome, modelo in melhores_modelos.items():
     fpr, tpr, _ = roc_curve(y_teste, y_prob)
     curvas_roc[nome] = (fpr, tpr)
 =======
-        'Acurácia': acc,
+        'AcurÃ¡cia': acc,
         'ROC-AUC': auc
     })
     curvas_roc[nome] = (roc_curve(y_teste, y_prob), auc)
@@ -502,7 +501,7 @@ plt.figure(figsize=(8, 6))
 for nome, ((fpr, tpr, _), auc_val) in curvas_roc.items():
     plt.plot(fpr, tpr, lw=2, label=f'{nome} (AUC = {auc_val:.4f})')
 
-plt.plot([0, 1], [0, 1], color='gray', linestyle='--', lw=1.5, label='Aleatório (AUC = 0.5000)')
+plt.plot([0, 1], [0, 1], color='gray', linestyle='--', lw=1.5, label='AleatÃ³rio (AUC = 0.5000)')
 >>>>>>> 08970b513e49b5c478f87028f8ad75cb1ed485eb
 plt.xlim([0.0, 1.0])
 plt.ylim([0.0, 1.05])
@@ -534,13 +533,13 @@ plt.tight_layout()
 plt.savefig('curvas_roc_comparativas.png', dpi=300)
 plt.close()
 
-# Plotagem e Salvamento do Histórico do Optuna
+# Plotagem e Salvamento do HistÃ³rico do Optuna
 melhor_nome_estudo = max(estudos, key=lambda k: estudos[k].best_value)
 fig_hist = optuna.visualization.matplotlib.plot_optimization_history(estudos[melhor_nome_estudo])
-plt.title(f'Histórico de Convergência do Optuna ({melhor_nome_estudo})', fontsize=12, fontweight='bold')
+plt.title(f'HistÃ³rico de ConvergÃªncia do Optuna ({melhor_nome_estudo})', fontsize=12, fontweight='bold')
 plt.tight_layout()
 plt.savefig('optuna_historico_convergencia.png', dpi=300)
 plt.close()
 
-print("\nProcessamento concluído")
+print("\nProcessamento concluÃ­do")
 >>>>>>> 08970b513e49b5c478f87028f8ad75cb1ed485eb
