@@ -1,0 +1,24 @@
+Treino: 3000 moleculas | Teste: 751 moleculas | Atributos: 1776
+Baseline ROC-AUC no Teste: 0.4883
+Otimizando Arvore de Decisao...
+Otimizando Random Forest...
+Otimizando XGBoost...
+Otimizando LightGBM...
+Otimizando KNN...
+
+=== RESULTADOS FINAIS NO CONJUNTO DE TESTE ===
+[Arvore de Decisao] ROC-AUC: 0.8234
+[Random Forest] ROC-AUC: 0.8789
+[XGBoost] ROC-AUC: 0.8870
+[LightGBM] ROC-AUC: 0.8812
+[KNN] ROC-AUC: 0.8582
+
+Tabela Geral:
+           Modelo  ROC-AUC
+          XGBoost 0.887035
+         LightGBM 0.881250
+    Random Forest 0.878943
+              KNN 0.858172
+Arvore de Decisao 0.823389
+         Baseline 0.488294
+Processo concluido com sucesso!
